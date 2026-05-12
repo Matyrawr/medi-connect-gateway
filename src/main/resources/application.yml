@@ -1,0 +1,18 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: pacientes
+          uri: ${PACIENTES_SERVICE_URL:http://localhost:8081}
+          predicates:
+            - Path=/api/pacientes/**
+        - id: doctores
+          uri: ${DOCTORES_SERVICE_URL:http://localhost:8082}
+          predicates:
+            - Path=/api/doctores/**
+        - id: citas
+          uri: ${CITAS_SERVICE_URL:http://localhost:8083}
+          predicates:
+            - Path=/api/citas/**

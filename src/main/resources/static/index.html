@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>MediConnect | Gestión de Citas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+      :root {
+        --primary-color: #4361ee;
+        --success-color: #2ec4b6;
+        --bg-body: #f8f9fa;
+      }
+      body { background-color: var(--bg-body); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+      
+      /* Estilo de Tarjetas Modernas */
+      .card { 
+        border: none; 
+        border-radius: 15px; 
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05); 
+        transition: transform 0.2s;
+        margin-bottom: 1.5rem;
+      }
+      .card-header { 
+        background: transparent; 
+        border-bottom: 1px solid #eee; 
+        font-weight: 600; 
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* Sidebar / Header */
+      .navbar-brand { font-weight: 700; color: var(--primary-color) !important; }
+      .header-section {
+        background: white;
+        padding: 1.5rem 0;
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 2rem;
+      }
+
+      /* Consola de Salida */
+      pre {
+        background: #1e1e1e;
+        color: #9cdcfe;
+        padding: 15px;
+        border-radius: 10px;
+        max-height: 300px;
+        overflow-y: auto;
+        font-size: 0.85rem;
+        border: 2px solid #333;
+      }
+      .status-badge { font-size: 0.7rem; padding: 4px 8px; border-radius: 20px; }
+
+      /* Botones */
+      .btn { border-radius: 8px; font-weight: 500; padding: 0.5rem 1.2rem; }
+      .btn-primary { background-color: var(--primary-color); border: none; }
+      .btn-success { background-color: var(--success-color); border: none; }
+    </style>
+  </head>
+  <body>
+
+    <header class="header-section shadow-sm">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <div class="bg-primary text-white p-2 rounded-3 me-3">
+              <i class="bi bi-calendar-check-fill fs-4"></i>
+            </div>
+            <div>
+              <h1 class="h4 mb-0 navbar-brand">MediConnect v2.0</h1>
+              <small class="text-muted">Sistema de Gestión de Red Médica</small>
+            </div>
+          </div>
+          <span class="badge bg-light text-primary border border-primary">Modo Estudiante</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-header"><i class="bi bi-person-badge"></i> Doctores</div>
+            <div class="card-body">
+              <form id="doctorForm" class="row g-3">
+                <div class="col-12"><input name="nombre" class="form-control" placeholder="Nombre completo" required></div>
+                <div class="col-12"><input name="especialidad" class="form-control" placeholder="Especialidad (Ej: Cardiología)"></div>
+                <div class="col-6"><label class="small text-muted">Hora Inicio</label><input name="horaInicio" class="form-control" type="time" value="08:00"></div>
+                <div class="col-6"><label class="small text-muted">Hora Fin</label><input name="horaFin" class="form-control" type="time" value="17:00"></div>
+                <div class="col-12"><input name="duracionCita" class="form-control" type="number" placeholder="Minutos por cita (30)"></div>
+                <button class="btn btn-primary w-100 mt-3">Registrar Doctor</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><i class="bi bi-people"></i> Pacientes</div>
+            <div class="card-body">
+              <form id="pacienteForm" class="row g-3">
+                <div class="col-12"><input name="nombre" class="form-control" placeholder="Nombre completo" required></div>
+                <div class="col-12"><input name="email" class="form-control" placeholder="Correo electrónico" type="email"></div>
+                <div class="col-12"><input name="telefono" class="form-control" placeholder="Teléfono de contacto"></div>
+                <button class="btn btn-success w-100 mt-3">Registrar Paciente</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="card h-100">
+            <div class="card-header"><i class="bi bi-clock-history"></i> Gestión de Citas</div>
+            <div class="card-body">
+              <label class="fw-bold mb-2">Ver Disponibilidad</label>
+              <form id="dispForm" class="row g-2 mb-4">
+                <div class="col-5"><input name="doctorId" class="form-control" placeholder="ID Doctor" type="number" required></div>
+                <div class="col-7"><input name="fecha" class="form-control" type="date" required></div>
+                <button class="btn btn-outline-primary btn-sm w-100 mt-2">Consultar Horas</button>
+              </form>
+              
+              <hr>
+              
+              <label class="fw-bold mb-2 mt-2">Agendar Nueva Cita</label>
+              <form id="citaForm" class="row g-3">
+                <div class="col-6"><input name="pacienteId" class="form-control" placeholder="ID Paciente" type="number" required></div>
+                <div class="col-6"><input name="doctorId" class="form-control" placeholder="ID Doctor" type="number" required></div>
+                <div class="col-12"><input name="fechaHora" class="form-control" type="datetime-local" required></div>
+                <div class="col-12"><textarea name="motivo" class="form-control" placeholder="Motivo de la consulta" rows="2"></textarea></div>
+                <button class="btn btn-primary w-100">Confirmar Cita</button>
+              </form>
+
+              <hr>
+
+              <form id="cancelForm" class="mt-4 p-3 bg-light rounded-3">
+                <label class="small fw-bold text-danger">Anular Cita</label>
+                <div class="input-group">
+                  <input name="citaId" class="form-control" placeholder="ID Cita" type="number" required>
+                  <button class="btn btn-danger">Cancelar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="card h-100">
+            <div class="card-header bg-dark text-white rounded-top-4">
+              <i class="bi bi-terminal"></i> Consola del Sistema
+            </div>
+            <div class="card-body bg-dark rounded-bottom-4">
+              <div id="statusContainer" class="mb-2"></div>
+              <pre id="outputPre">Esperando acciones...</pre>
+              <small class="text-secondary mt-2 d-block">Respuesta del Gateway (Port 8080)</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const out = (status, data) => {
+        const pre = document.getElementById('outputPre');
+        const statusCont = document.getElementById('statusContainer');
+        
+        // Efecto visual de estado
+        const color = status >= 200 && status < 300 ? 'bg-success' : 'bg-danger';
+        statusCont.innerHTML = `<span class="badge ${color} status-badge">HTTP ${status}</span>`;
+        
+        pre.textContent = (typeof data === 'string' ? data : JSON.stringify(data, null, 2));
+      };
+
+      // Mantenemos el resto de tus funciones postJson y EventListeners exactamente igual
+      async function postJson(url, data){
+        const res = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json; charset=utf-8'}, body: JSON.stringify(data)});
+        const text = await res.text();
+        try { return [res.status, JSON.parse(text)]; } catch(e){ return [res.status, text]; }
+      }
+
+      document.getElementById('doctorForm').addEventListener('submit', async e => {
+        e.preventDefault();
+        const f = e.target;
+        const data = { nombre:f.nombre.value, especialidad:f.especialidad.value, horaInicio:f.horaInicio.value, horaFin:f.horaFin.value, duracionCita: Number(f.duracionCita.value) };
+        const [status, body] = await postJson('/api/doctores', data);
+        out(status, body);
+      });
+
+      document.getElementById('pacienteForm').addEventListener('submit', async e => {
+        e.preventDefault();
+        const f = e.target;
+        const data = { nombre:f.nombre.value, email:f.email.value, telefono:f.telefono.value };
+        const [status, body] = await postJson('/api/pacientes', data);
+        out(status, body);
+      });
+
+      document.getElementById('dispForm').addEventListener('submit', async e => {
+        e.preventDefault();
+        const f = e.target; const id = f.doctorId.value; const fecha = f.fecha.value;
+        const res = await fetch(`/api/doctores/${id}/disponibilidad?fecha=${fecha}`);
+        let body;
+        try { body = await res.json(); } catch(e) { body = await res.text(); }
+        out(res.status, body);
+      });
+
+      document.getElementById('citaForm').addEventListener('submit', async e => {
+        e.preventDefault();
+        const f = e.target;
+        let dt = f.fechaHora.value;
+        if(dt && dt.length === 16) dt = dt + ':00';
+        const data = { pacienteId: Number(f.pacienteId.value), doctorId: Number(f.doctorId.value), fechaHora: dt, motivo: f.motivo.value };
+        const [status, body] = await postJson('/api/citas', data);
+        out(status, body);
+      });
+
+      document.getElementById('cancelForm').addEventListener('submit', async e => {
+        e.preventDefault();
+        const id = e.target.citaId.value;
+        const res = await fetch(`/api/citas/${id}/cancelar`, {method:'PUT'});
+        const text = await res.text();
+        out(res.status, text || (res.status===200? 'Cancelada' : ''));
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
