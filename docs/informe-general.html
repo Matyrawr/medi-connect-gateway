@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe general del sistema</title>
+  <style>
+    :root {
+      --bg: #f6f3ee;
+      --surface: #ffffff;
+      --text: #16202a;
+      --muted: #5c6670;
+      --primary: #0f766e;
+      --primary-soft: #d9f0ec;
+      --accent: #b45309;
+      --border: #dde3e8;
+      --shadow: 0 10px 30px rgba(22, 32, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #f8f5ef 0%, #eef4f6 100%);
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+
+    .hero {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 12px;
+      line-height: 1.15;
+    }
+
+    h1 { font-size: 2.4rem; }
+    h2 { font-size: 1.5rem; margin-top: 28px; }
+    h3 { font-size: 1.05rem; margin-top: 18px; }
+
+    p { margin: 0 0 12px; }
+
+    .subtitle { color: var(--muted); max-width: 760px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .label {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin: 14px 0 24px;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--border);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f1f6f8;
+      font-weight: 700;
+    }
+
+    ul, ol { margin: 10px 0 12px 22px; }
+
+    .figure {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      margin: 14px 0 24px;
+    }
+
+    .figure img,
+    .figure svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .footer {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 30px;
+    }
+
+    .kpi {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .kpi .card { text-align: center; }
+
+    .kpi .value {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .kpi .text {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media print {
+      body { background: white; }
+      .page { padding: 0; }
+      .hero, .card, .figure, table { box-shadow: none; }
+      a { color: inherit; text-decoration: none; }
+      .grid, .kpi { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 800px) {
+      .grid, .kpi { grid-template-columns: 1fr; }
+      h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="label">Informe general</div>
+      <h1>Sistema de Citas Distribuido</h1>
+      <p class="subtitle">Arquitectura de microservicios con Spring Boot, Spring Cloud Gateway, H2 en modo archivo, Swagger/OpenAPI, pruebas unitarias y cobertura JaCoCo.</p>
+
+      <div class="kpi">
+        <div class="card"><span class="value">3</span><span class="text">microservicios backend</span></div>
+        <div class="card"><span class="value">6</span><span class="text">tests unitarios</span></div>
+        <div class="card"><span class="value">63.28%</span><span class="text">cobertura de líneas</span></div>
+        <div class="card"><span class="value">41.67%</span><span class="text">cobertura de ramas</span></div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <div class="label">Arquitectura</div>
+        <h2>Componentes</h2>
+        <ul>
+          <li><strong>frontend-citas</strong>: gateway y frontend estático.</li>
+          <li><strong>ms-pacientes</strong>: gestión de pacientes.</li>
+          <li><strong>ms-doctores</strong>: gestión de doctores.</li>
+          <li><strong>ms-citas</strong>: gestión de citas, disponibilidad y cancelación.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="label">Persistencia</div>
+        <h2>H2 en modo archivo</h2>
+        <ul>
+          <li>Pacientes: <code>jdbc:h2:file:./data/pacientesdb</code></li>
+          <li>Doctores: <code>jdbc:h2:file:./data/doctoresdb</code></li>
+          <li>Citas: <code>jdbc:h2:file:./data/citasdb</code></li>
+        </ul>
+        <p>La configuración se apoya en volúmenes Docker para conservar los datos entre reinicios.</p>
+      </section>
+    </div>
+
+    <h2>Diagrama de arquitectura</h2>
+    <div class="figure">
+      <img src="images/arquitectura.svg" alt="Diagrama de arquitectura del sistema">
+    </div>
+
+    <h2>Documentación API y pruebas</h2>
+    <div class="grid">
+      <section class="card">
+        <h3>Swagger/OpenAPI</h3>
+        <p>Cada backend expone Swagger UI para validar y probar endpoints sin necesidad de Postman.</p>
+      </section>
+      <section class="card">
+        <h3>Pruebas unitarias</h3>
+        <p>Se ejecutaron pruebas con JUnit 5 y Mockito en la capa de servicio. Los resultados fueron 2, 2 y 4 tests para pacientes, doctores y citas respectivamente, sin fallos.</p>
+      </section>
+    </div>
+
+    <h2>Métricas de cobertura</h2>
+    <div class="figure">
+      <img src="images/metricas.svg" alt="Gráfico de métricas y cobertura">
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Módulo</th>
+          <th>Líneas</th>
+          <th>Instrucciones</th>
+          <th>Métodos</th>
+          <th>Clases</th>
+          <th>Ramas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>ms-pacientes</td><td>55.22%</td><td>53.66%</td><td>63.89%</td><td>42.86%</td><td>0.00%</td></tr>
+        <tr><td>ms-doctores</td><td>63.16%</td><td>61.79%</td><td>73.81%</td><td>42.86%</td><td>0.00%</td></tr>
+        <tr><td>ms-citas</td><td>68.14%</td><td>67.76%</td><td>73.21%</td><td>55.56%</td><td>62.50%</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Resultados de pruebas</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Módulo</th>
+          <th>Tests</th>
+          <th>Fallos</th>
+          <th>Errores</th>
+          <th>Omitidos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>ms-pacientes</td><td>2</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>ms-doctores</td><td>2</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>ms-citas</td><td>4</td><td>0</td><td>0</td><td>0</td></tr>
+      </tbody>
+    </table>
+
+    <div class="footer">
+      <p>Este archivo está pensado para abrirse en un navegador y exportarse a PDF con imprimir/guardar como PDF. Las imágenes SVG de arquitectura y métricas están en la carpeta <code>docs/images</code>.</p>
+    </div>
+  </main>
+</body>
+</html>

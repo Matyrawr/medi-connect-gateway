@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760" role="img" aria-labelledby="title desc">
+  <title id="title">Arquitectura del sistema de citas distribuido</title>
+  <desc id="desc">Usuario accede al gateway frontend-citas, que enruta a ms-pacientes, ms-doctores y ms-citas, cada uno con su base H2 propia.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f6f3ee"/>
+      <stop offset="100%" stop-color="#eef5f7"/>
+    </linearGradient>
+    <linearGradient id="box" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f7fafc"/>
+    </linearGradient>
+    <style>
+      .title { font: 700 34px 'Segoe UI', Arial, sans-serif; fill: #16202a; }
+      .subtitle { font: 400 18px 'Segoe UI', Arial, sans-serif; fill: #5c6670; }
+      .label { font: 700 24px 'Segoe UI', Arial, sans-serif; fill: #16202a; }
+      .small { font: 600 18px 'Segoe UI', Arial, sans-serif; fill: #0f766e; }
+      .text { font: 400 18px 'Segoe UI', Arial, sans-serif; fill: #334155; }
+      .box { fill: url(#box); stroke: #cfd8df; stroke-width: 2; rx: 24; }
+      .shadow { filter: drop-shadow(0 12px 24px rgba(22, 32, 42, 0.12)); }
+      .line { stroke: #0f766e; stroke-width: 5; fill: none; stroke-linecap: round; }
+      .dashed { stroke: #b45309; stroke-dasharray: 10 10; }
+      .chip { fill: #d9f0ec; stroke: #a7d8cf; stroke-width: 1.5; rx: 999; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f766e"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="760" fill="url(#bg)"/>
+
+  <text x="70" y="72" class="title">Sistema de Citas Distribuido</text>
+  <text x="70" y="108" class="subtitle">Gateway central + tres microservicios con H2 persistente y Swagger/OpenAPI</text>
+
+  <rect x="70" y="170" width="250" height="110" class="box shadow"/>
+  <text x="195" y="210" text-anchor="middle" class="label">Usuario</text>
+  <text x="195" y="246" text-anchor="middle" class="text">Navegador</text>
+
+  <rect x="385" y="150" width="300" height="150" class="box shadow"/>
+  <text x="535" y="198" text-anchor="middle" class="label">frontend-citas</text>
+  <text x="535" y="232" text-anchor="middle" class="text">Spring Cloud Gateway</text>
+  <rect x="450" y="252" width="170" height="30" class="chip"/>
+  <text x="535" y="273" text-anchor="middle" class="small">Puerto 8080</text>
+
+  <rect x="780" y="120" width="240" height="180" class="box shadow"/>
+  <text x="900" y="165" text-anchor="middle" class="label">ms-pacientes</text>
+  <text x="900" y="198" text-anchor="middle" class="text">CRUD de pacientes</text>
+  <rect x="830" y="228" width="140" height="30" class="chip"/>
+  <text x="900" y="249" text-anchor="middle" class="small">8081</text>
+
+  <rect x="1080" y="120" width="240" height="180" class="box shadow"/>
+  <text x="1200" y="165" text-anchor="middle" class="label">ms-doctores</text>
+  <text x="1200" y="198" text-anchor="middle" class="text">CRUD de doctores</text>
+  <rect x="1130" y="228" width="140" height="30" class="chip"/>
+  <text x="1200" y="249" text-anchor="middle" class="small">8082</text>
+
+  <rect x="935" y="390" width="260" height="180" class="box shadow"/>
+  <text x="1065" y="435" text-anchor="middle" class="label">ms-citas</text>
+  <text x="1065" y="468" text-anchor="middle" class="text">Agendar, consultar y cancelar</text>
+  <rect x="990" y="498" width="150" height="30" class="chip"/>
+  <text x="1065" y="519" text-anchor="middle" class="small">8083</text>
+
+  <rect x="770" y="620" width="260" height="72" class="box shadow"/>
+  <text x="900" y="662" text-anchor="middle" class="label" style="font-size:22px">H2 pacientes</text>
+
+  <rect x="1070" y="620" width="260" height="72" class="box shadow"/>
+  <text x="1200" y="662" text-anchor="middle" class="label" style="font-size:22px">H2 doctores</text>
+
+  <rect x="935" y="300" width="260" height="72" class="box shadow"/>
+  <text x="1065" y="342" text-anchor="middle" class="label" style="font-size:22px">H2 citas</text>
+
+  <path d="M 320 225 C 350 225, 355 225, 385 225" class="line" marker-end="url(#arrow)"/>
+  <path d="M 685 195 C 725 195, 735 180, 780 180" class="line" marker-end="url(#arrow)"/>
+  <path d="M 685 225 C 735 225, 815 225, 1080 225" class="line" marker-end="url(#arrow)"/>
+  <path d="M 535 300 C 640 380, 820 420, 935 445" class="line dashed" marker-end="url(#arrow)"/>
+  <path d="M 900 300 C 900 420, 900 520, 900 620" class="line" marker-end="url(#arrow)"/>
+  <path d="M 1200 300 C 1200 420, 1200 520, 1200 620" class="line" marker-end="url(#arrow)"/>
+  <path d="M 1065 570 C 1065 585, 1065 600, 1065 620" class="line" marker-end="url(#arrow)"/>
+
+  <text x="520" y="335" class="subtitle" text-anchor="middle">Enrutamiento de API y UI</text>
+  <text x="1065" y="592" class="subtitle" text-anchor="middle">Persistencia local</text>
+</svg>

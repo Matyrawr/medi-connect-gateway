@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="860" viewBox="0 0 1400 860" role="img" aria-labelledby="title desc">
+  <title id="title">Métricas de pruebas y cobertura</title>
+  <desc id="desc">Gráfico comparativo con pruebas ejecutadas y cobertura de líneas por módulo, además del resumen global del backend.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f6fbfc"/>
+    </linearGradient>
+    <style>
+      .title { font: 700 34px 'Segoe UI', Arial, sans-serif; fill: #16202a; }
+      .subtitle { font: 400 18px 'Segoe UI', Arial, sans-serif; fill: #5c6670; }
+      .label { font: 600 18px 'Segoe UI', Arial, sans-serif; fill: #334155; }
+      .axis { stroke: #9aa7b2; stroke-width: 2; }
+      .grid { stroke: #e3e8ee; stroke-width: 1.5; }
+      .bar1 { fill: #0f766e; }
+      .bar2 { fill: #b45309; }
+      .bar3 { fill: #2563eb; }
+      .card { fill: url(#bg); stroke: #d7e0e7; stroke-width: 2; rx: 24; filter: drop-shadow(0 10px 20px rgba(22, 32, 42, 0.08)); }
+      .kpiValue { font: 700 28px 'Segoe UI', Arial, sans-serif; fill: #0f766e; }
+      .kpiLabel { font: 600 16px 'Segoe UI', Arial, sans-serif; fill: #5c6670; }
+      .small { font: 600 15px 'Segoe UI', Arial, sans-serif; fill: #5c6670; }
+    </style>
+  </defs>
+
+  <rect width="1400" height="860" fill="#f7fafc"/>
+  <text x="70" y="70" class="title">Métricas del proyecto</text>
+  <text x="70" y="106" class="subtitle">Pruebas unitarias, cobertura JaCoCo y resumen global del backend</text>
+
+  <rect x="70" y="140" width="1260" height="130" class="card"/>
+  <text x="130" y="190" class="kpiValue">8</text>
+  <text x="130" y="220" class="kpiLabel">tests ejecutados</text>
+  <text x="380" y="190" class="kpiValue">0</text>
+  <text x="380" y="220" class="kpiLabel">fallos</text>
+  <text x="580" y="190" class="kpiValue">63.28%</text>
+  <text x="580" y="220" class="kpiLabel">líneas globales</text>
+  <text x="850" y="190" class="kpiValue">70.90%</text>
+  <text x="850" y="220" class="kpiLabel">métodos globales</text>
+  <text x="1120" y="190" class="kpiValue">41.67%</text>
+  <text x="1120" y="220" class="kpiLabel">ramas globales</text>
+
+  <text x="70" y="340" class="label">Pruebas ejecutadas por módulo</text>
+  <line x1="110" y1="640" x2="640" y2="640" class="axis"/>
+  <line x1="110" y1="430" x2="110" y2="640" class="axis"/>
+  <line x1="110" y1="590" x2="640" y2="590" class="grid"/>
+  <line x1="110" y1="540" x2="640" y2="540" class="grid"/>
+  <line x1="110" y1="490" x2="640" y2="490" class="grid"/>
+  <line x1="110" y1="440" x2="640" y2="440" class="grid"/>
+
+  <rect x="165" y="540" width="110" height="100" class="bar1"/>
+  <rect x="340" y="540" width="110" height="100" class="bar2"/>
+  <rect x="515" y="440" width="110" height="200" class="bar3"/>
+  <text x="220" y="675" text-anchor="middle" class="small">ms-pacientes</text>
+  <text x="395" y="675" text-anchor="middle" class="small">ms-doctores</text>
+  <text x="570" y="675" text-anchor="middle" class="small">ms-citas</text>
+  <text x="220" y="528" text-anchor="middle" class="small" fill="#0f766e">2</text>
+  <text x="395" y="528" text-anchor="middle" class="small" fill="#b45309">2</text>
+  <text x="570" y="428" text-anchor="middle" class="small" fill="#2563eb">4</text>
+
+  <text x="760" y="340" class="label">Cobertura de líneas por módulo</text>
+  <line x1="800" y1="640" x2="1290" y2="640" class="axis"/>
+  <line x1="800" y1="430" x2="800" y2="640" class="axis"/>
+  <line x1="800" y1="590" x2="1290" y2="590" class="grid"/>
+  <line x1="800" y1="540" x2="1290" y2="540" class="grid"/>
+  <line x1="800" y1="490" x2="1290" y2="490" class="grid"/>
+  <line x1="800" y1="440" x2="1290" y2="440" class="grid"/>
+
+  <rect x="850" y="516" width="110" height="124" class="bar1"/>
+  <rect x="1025" y="507" width="110" height="133" class="bar2"/>
+  <rect x="1200" y="496" width="110" height="144" class="bar3"/>
+  <text x="905" y="675" text-anchor="middle" class="small">55.22%</text>
+  <text x="1080" y="675" text-anchor="middle" class="small">63.16%</text>
+  <text x="1255" y="675" text-anchor="middle" class="small">68.14%</text>
+  <text x="905" y="695" text-anchor="middle" class="small">pacientes</text>
+  <text x="1080" y="695" text-anchor="middle" class="small">doctores</text>
+  <text x="1255" y="695" text-anchor="middle" class="small">citas</text>
+</svg>
